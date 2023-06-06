@@ -1,0 +1,70 @@
+@import "mixins";
+@import "variables";
+
+.bill-details {
+  padding: 0 50px;
+  margin-bottom: 50px;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    @include h2;
+    font-size: 34px;
+    white-space: nowrap;
+    margin-right: 22px;
+  }
+
+  &__btn {
+    @include button;
+    font-size: 16px;
+    padding: 13px 24px 13px 56px;
+    color: $white;
+    cursor: pointer;
+    background-image: url('/assets/img/button-arrow.svg');
+    background-repeat: no-repeat;
+    background-position: 24px center;
+  }
+
+  &__btn:hover {
+    background-color: $buttonGray;
+    transition: background-color .2s ease-in-out;
+  }
+
+  &__btn:active {
+    background-color: $secondaryBlack;
+    color: $white;
+  }
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__number {
+    @include h2;
+    font-size: 34px;
+    font-weight: 400;
+    letter-spacing: 1.02px;
+  }
+
+  &__description {
+    @include h2;
+    margin-right: 48px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  &__balance {
+    @include h2;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+  }
+}

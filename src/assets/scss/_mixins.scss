@@ -1,0 +1,50 @@
+@import "variables";
+
+@mixin button {
+  background-color: $mainGreen;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@mixin grayBlock {
+  background-color: $athensGray;
+  border-radius: 20px;
+}
+
+@mixin h2 {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 125%;
+  color: $primaryBlack;
+}
+
+@mixin h3 {
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 32px;
+  color: $primaryBlack;
+}
+
+@mixin cardText {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: $primaryBlack;
+}
+
+@mixin placeholder {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 21px;
+  color: $secondaryBlack;
+}
+
+@mixin label {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $black;
+}
+

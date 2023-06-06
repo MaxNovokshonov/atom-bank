@@ -1,0 +1,57 @@
+@import "variables";
+@import "mixins";
+
+.card {
+
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__number {
+    @include cardText;
+    margin-bottom: 20px;
+  }
+
+  &__balance {
+    @include cardText;
+    font-weight: 600;
+    font-size: 27px;
+    margin-bottom: 30px;
+  }
+
+  &__info {
+    @include cardText;
+    font-weight: 400;
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  &__date {
+    @include cardText;
+    line-height: 15px;
+  }
+
+  &__btn {
+    align-self: flex-end;
+    @include button;
+    font-size: 16px;
+    padding: 12px 21px;
+    background-color: transparent;
+    border: 2px solid $primaryBlack;
+    color: $primaryBlack;
+    cursor: pointer;
+  }
+
+  &__btn:hover {
+    background-color: $secondaryBlack;
+    color: $white;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+  }
+
+  &__btn:active {
+    background-color: $secondaryBlack;
+    color: $white;
+  }
+}

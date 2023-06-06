@@ -1,0 +1,68 @@
+@import "mixins";
+@import "variables";
+
+.transfer-history {
+  @include grayBlock;
+  width: 100%;
+  min-height: 345px;
+  padding: 25px 50px;
+
+  &__title {
+    @include h2;
+    margin-bottom: 25px;
+    font-size: 20px;
+    line-height: 23px;
+  }
+}
+
+.transfer-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 190px;
+
+  &__thead {
+    min-height: 64px;
+    padding: 20px 50px;
+    //margin-bottom: 21px;
+    background-color: $mainGreen;
+    border-radius: 15px;
+  }
+
+  &__tbody {
+    min-height: 71px;
+  }
+}
+
+.thead {
+  &__tr {
+    @include h3;
+    font-size: 20px;
+    color: $white;
+    margin-right: 50px;
+  }
+
+  &__td {
+    display: inline-block;
+    width: 200px;
+    margin-right: 80px;
+  }
+}
+
+.tbody {
+  &__tr {
+    width: 100%;
+    display: inline-block;
+    @include cardText;
+    margin-right: 50px;
+    padding: 21px 50px 26px;
+    color: $secondaryBlack;
+    border-bottom: 1px solid $mainGreen;
+  }
+
+  &__td {
+    display: inline-block;
+    width: 200px;
+    margin-right: 80px;
+  }
+}

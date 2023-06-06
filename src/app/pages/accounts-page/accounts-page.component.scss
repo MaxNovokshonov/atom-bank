@@ -1,0 +1,197 @@
+@import "mixins";
+@import "variables";
+
+.accounts-header {
+  display: flex;
+  align-items: center;
+  padding: 0 51px;
+  margin-bottom: 50px;
+
+  &__title {
+    @include h2;
+    white-space: nowrap;
+    margin-right: 22px;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__select {
+    width: 300px;
+    height: 44px;
+    border-radius: 7px;
+  }
+
+  &__btn {
+    @include button;
+    color: $white;
+    font-size: 16px;
+    padding: 12px 32px;
+  }
+
+  &__btn:hover {
+    background-color: $secondaryBlack;
+    color: $white;
+    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+  }
+
+  &__btn:active {
+    background-color: $secondaryBlack;
+    color: $white;
+  }
+}
+
+.sort__type {
+  position: relative;
+}
+
+.contact__name {
+  @include label;
+  width: 100%;
+  height: 44px;
+  z-index: 1;
+  position: relative;
+  padding: 10px 60px 10px 12px;
+  cursor: pointer;
+  border: 1px solid $primaryBlack;
+  border-radius: 12px;
+  color: $primaryBlack;
+}
+
+.contact__name::before {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: 14px;
+  width: 15px;
+  height: 15px;
+  background-image: url('/assets/img/contact-arrow.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition: transform .3s ease-in-out;
+}
+
+.contact__name:hover {
+  border: 1px solid $primaryBlack;
+  transition: border-color .3s ease-in-out;
+}
+
+.contact__name:active {
+  background-color: var(--color-mischka);
+  transition: background-color .3s ease-in-out;
+}
+
+.contact__list--active.contact__name::before {
+  transform: rotate(-180deg);
+  transition: transform .3s ease-in-out;
+}
+
+.contact__list {
+  z-index: 2;
+  position: absolute;
+  font-size: 12px;
+  padding: 10px 0 6px;
+  width: 100%;
+  max-width: 134px;
+  min-width: 134px;
+  top: 36px;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+  background-color: var(--color-athens-gray);
+  border: 1px solid var(--color-gray-suit);
+}
+
+.contact__list.contact__list--active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+}
+
+.contact__item {
+  cursor: pointer;
+  padding-top: 4px;
+  border-bottom: 7px;
+  padding-left: 12px;
+  transition: background-color .3s ease-in-out;
+}
+
+.contact__item:hover {
+  transition: background-color .3s ease-in-out;
+  background-color: var(--color-mischka);
+}
+
+.accounts-list {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  column-gap: 40px;
+  row-gap: 30px;
+  padding: 0 50px;
+
+  &__item {
+    min-height: 156px;
+    padding: 22px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 9px;
+    background-image: url("/assets/img/card_background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 1400px) {
+  .accounts-list {
+    grid-template-columns: repeat(2, 1fr);
+
+  }
+}
+
+@media (max-width: 990px) {
+  .accounts-header {
+    flex-direction: column;
+    padding: 0 15px;
+
+    &__title {
+      margin: 0 0 20px;
+    }
+  }
+  .accounts-list {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .accounts-header {
+    &__form {
+      flex-direction: column;
+    }
+
+    &__select {
+      width: 100%;
+      margin: 0 0 20px;
+    }
+
+    &__btn {
+      width: 100%;
+    }
+  }
+  .card {
+    flex-direction: column;
+  }
+}

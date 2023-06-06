@@ -1,0 +1,20 @@
+<header class="header">
+  <img class="header__logo" src="assets/img/Logo_Atom_black.svg" alt="Лого">
+  <nav class="nav"
+       [class.nav-active]="mobileMenuOpen"
+  >
+    <a class="nav__item" href="#">Банкоматы</a>
+    <a class="nav__item active" href="#">Счета</a>
+    <a class="nav__item" href="#">Валюта</a>
+    <a class="nav__item" href="#">Выйти</a>
+  </nav>
+  <button
+    class="burger"
+    (click)="openMobileMenu()"
+    [class.burger-active]="mobileMenuOpen"
+  >
+    <span class="burger__line"></span>
+    <span class="burger__line"></span>
+    <span class="burger__line"></span>
+  </button>
+</header>
