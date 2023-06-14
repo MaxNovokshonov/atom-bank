@@ -7,7 +7,33 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
-    column-gap: 40px;
+    gap: 40px;
     margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 1350px) {
+  .transfer {
+
+    &__wrapper {
+      grid-template-columns: 4fr 5fr;
+    }
+  }
+}
+
+@media (max-width: 990px) {
+  .transfer {
+    padding: 0 25px;
+
+    &__wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .transfer {
+    padding: 0 15px;
+
   }
 }

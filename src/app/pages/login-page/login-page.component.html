@@ -1,15 +1,43 @@
 <div class="login">
   <h3 class="login__title">Добро пожаловать</h3>
-  <form class="login-form">
+  <form class="login-form"
+        [formGroup]="authForm"
+        (ngSubmit)="submit()"
+  >
     <div class="login-form__input">
       <label>Введите имя пользователя</label>
-      <input type="text" placeholder="Логин">
+      <input
+        (input)="clearError()"
+        [class.error]="login.errors?.['required'] && (login.dirty || login.touched)"
+        formControlName="login"
+        type="text" placeholder="Логин">
+      <span
+        *ngIf="login.errors?.['required'] && (login.dirty || login.touched)"
+        class="login-form__error-invalid">Поле обязательно для заполнения</span>
     </div>
     <div class="login-form__input">
       <label>Введите пароль</label>
-      <input type="password" placeholder="Пароль">
+      <input
+        (input)="clearError()"
+        [class.error]="password.errors && (password.dirty || password.touched)"
+        formControlName="password"
+        type="password" placeholder="Пароль">
+      <span
+        *ngIf="password.errors?.['minlength'] && (password.dirty || password.touched)"
+        class="login-form__error-invalid">Минимум {{password.errors?.['minlength'].requiredLength}}
+        символов. Сейчас {{password.errors?.['minlength'].actualLength}}</span>
+      <span
+        *ngIf="password.errors?.['required'] && (password.dirty || password.touched)"
+        class="login-form__error-invalid">Поле обязательно для заполнения</span>
     </div>
-    <span class="login-form__error">Пользователь не найден</span>
-    <button class="login-form__btn">Войти</button>
+    <span
+      *ngIf="errorMessage.trim().length != 0"
+      class="login-form__error">{{errorMessage}}</span>
+    <button
+      [disabled]="authForm.invalid"
+      class="login-form__btn"
+      type="submit"
+    >Войти
+    </button>
   </form>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-balance-dynamics',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./balance-dynamics.component.scss']
 })
 export class BalanceDynamicsComponent {
-
+  @Input() title = ''
 }

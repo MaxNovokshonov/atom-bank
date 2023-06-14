@@ -1,0 +1,21 @@
+.balance-history {
+  padding: 0 50px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 40px;
+}
+
+@media (max-width: 990px) {
+  .balance-history {
+    padding: 0 25px;
+
+  }
+}
+
+@media (max-width: 576px) {
+  .balance-history {
+    padding: 0 15px;
+
+  }
+}

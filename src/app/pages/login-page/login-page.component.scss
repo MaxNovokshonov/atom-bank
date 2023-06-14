@@ -11,7 +11,7 @@
   padding: 25px 40px 40px 40px;
   background-color: rgba(255, 255, 255, .4);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 40px;
+  border-radius: 20px;
 
   &__title {
     @include h3;
@@ -40,6 +40,10 @@
         border-radius: 9px;
       }
 
+      input.error {
+          border: 1px solid $errorGray;
+      }
+
       input::placeholder {
         @include placeholder;
       }
@@ -52,6 +56,14 @@
 
     &__error {
       @include label;
+      display: block;
+      margin-bottom: 25px;
+      color: $errorGray;
+    }
+
+    &__error-invalid {
+      @include label;
+      font-size: 12px;
       display: block;
       margin-bottom: 25px;
       color: $errorGray;

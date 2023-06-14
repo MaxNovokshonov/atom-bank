@@ -1,0 +1,134 @@
+@import "mixins";
+
+.exchange {
+  &-left {
+    &__bottom {
+      min-height: 273px;
+      @include boxShadow;
+      padding: 50px;
+    }
+  }
+}
+
+.exchange-form {
+  &__title {
+    @include currencyBlockText;
+    margin-bottom: 25px;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    //justify-content: space-between;
+  }
+
+  &__error {
+    @include label;
+    display: block;
+    margin-bottom: 25px;
+    color: $errorGray;
+  }
+}
+
+.change-form {
+  width: 100%;
+  margin-right: 25px;
+
+  &__select {
+    display: flex;
+    margin-bottom: 25px;
+
+    label {
+      @include label;
+      color: $black;
+      margin-right: 20px;
+    }
+
+  }
+
+  .select-wrapper {
+    width: 100%;
+  }
+
+  .select__wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .select__wrapper:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    label {
+      min-width: 55px;
+      @include label;
+      color: $black;
+      margin-right: 20px;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 10px 16px;
+      border: 1px solid $grayChateau;
+      border-radius: 7px;
+    }
+
+    input::placeholder {
+      @include placeholder;
+    }
+
+    input:focus-visible {
+      outline: 0;
+      border: 1px solid $denim;
+    }
+  }
+
+  &__btn {
+    @include button;
+    padding: 14px 21px;
+    color: $white;
+    margin-bottom: 15px;
+  }
+
+  &__btn:hover {
+    background-color: $anakiwa;
+    transition: background-color .2s ease-in-out;
+  }
+
+  &__btn:focus-visible {
+    outline: 0;
+    border: 1px solid $denim;
+  }
+}
+
+@media (max-width: 1350px) {
+  .exchange {
+    &-left {
+      &__bottom {
+        padding: 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .exchange {
+    &-left {
+      &__bottom {
+        padding: 15px;
+      }
+    }
+  }
+  .exchange-form {
+    &__title {
+      font-size: 18px;
+    }
+  }
+}

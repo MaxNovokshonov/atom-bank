@@ -1,0 +1,92 @@
+@import "mixins";
+
+.exchange {
+  &-left {
+
+    &__top {
+      min-height: 411px;
+      @include boxShadow;
+      padding: 50px;
+    }
+  }
+}
+
+.currency {
+  &__title {
+    @include currencyBlockText;
+    margin-bottom: 25px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+
+    &-name {
+      margin-right: 10px;
+      @include currencyBlockText;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    &-dotted {
+      width: 100%;
+      border-bottom: 1px dotted;
+    }
+
+    &-count {
+      margin-left: 10px;
+      @include currencyBlockText;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+  }
+
+  &__item:not(:last-child) {
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 1350px) {
+  .exchange {
+    &-left {
+      &__top {
+        padding: 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+
+  .exchange {
+    &-left {
+
+      &__top {
+        padding: 15px;
+      }
+    }
+  }
+  .currency {
+    &__title {
+      font-size: 18px;
+    }
+
+    &__item {
+
+      &-name {
+        margin-right: 5px;
+        font-size: 14px;
+      }
+
+      &-count {
+        font-size: 14px;
+        white-space: nowrap;
+      }
+    }
+
+    &__item:not(:last-child) {
+      margin-bottom: 25px;
+    }
+  }
+}

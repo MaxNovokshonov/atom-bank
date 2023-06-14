@@ -1,15 +1,35 @@
 <header class="header">
-  <img class="header__logo" src="assets/img/Logo_Atom_black.svg" alt="Лого">
+  <img class="header__logo" src="assets/img/Logo_Atom_black.svg" alt="Лого"
+       routerLink="/"
+  >
   <nav class="nav"
        [class.nav-active]="mobileMenuOpen"
+       *ngIf="isAuth()"
   >
-    <a class="nav__item" href="#">Банкоматы</a>
-    <a class="nav__item active" href="#">Счета</a>
-    <a class="nav__item" href="#">Валюта</a>
-    <a class="nav__item" href="#">Выйти</a>
+    <a class="nav__item"
+       routerLinkActive="active"
+       routerLink="/atm"
+    >Банкоматы</a>
+    <a
+      class="nav__item"
+      routerLinkActive="active"
+      routerLink="/accounts"
+    >Счета</a>
+    <a
+      class="nav__item"
+      routerLinkActive="active"
+      routerLink="/exchange"
+    >Валюта</a>
+    <a
+      (click)="logout()"
+      class="nav__item"
+      routerLinkActive="active"
+      routerLink="/authorization"
+    >Выйти</a>
   </nav>
   <button
     class="burger"
+    *ngIf="isAuth()"
     (click)="openMobileMenu()"
     [class.burger-active]="mobileMenuOpen"
   >

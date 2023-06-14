@@ -1,0 +1,103 @@
+@import "mixins";
+
+.exchange-right {
+  width: 100%;
+  min-height: 100%;
+  @include grayBlock;
+  background-color: $bodyGray;
+}
+
+.rate {
+  padding: 50px;
+
+  &__title {
+    @include currencyBlockText;
+    margin-bottom: 25px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+
+    &-name {
+      margin-right: 10px;
+      @include currencyBlockText;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    &-dotted {
+      width: 100%;
+      border-bottom: 1px dotted $mantis;
+    }
+
+    &-dotted-red {
+      width: 100%;
+      border-bottom: 1px dotted $carnation;
+    }
+
+    &-count {
+      margin-left: 10px;
+      padding-right: 35px;
+      @include currencyBlockText;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      background-image: url('/assets/img/exchange-arrow-green.svg');
+      background-position: right center;
+      background-repeat: no-repeat;
+    }
+
+    &-count-red {
+      margin-left: 10px;
+      padding-right: 35px;
+      @include currencyBlockText;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+      background-image: url('/assets/img/exchange-arrow-red.svg');
+      background-position: right center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &__item:not(:nth-last-child(-n + 21)) {
+    display: none;
+  }
+
+  &__item:not(:nth-last-child(12)) {
+    margin-bottom: 25px;
+  }
+}
+
+@media (max-width: 1350px) {
+  .rate {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .rate {
+    padding: 15px;
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__item {
+
+      &-name {
+        margin-right: 5px;
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      &-count,
+      &-count-red {
+        margin-left: 5px;
+        font-size: 14px;
+      }
+    }
+  }
+}

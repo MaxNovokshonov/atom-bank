@@ -3,7 +3,7 @@
 
 .new-transfer {
   @include grayBlock;
-  min-width: 606px;
+  width: 100%;
   min-height: 288px;
   padding: 25px 50px;
 
@@ -23,23 +23,6 @@
     @include label;
     display: block;
     color: $errorGray;
-  }
-
-  &__label {
-    min-width: 188px;
-    margin-right: 18px;
-    padding-top: 12px;
-
-    span {
-      display: inline-block;
-      width: 100%;
-      //@include loginLabel;
-      text-align: right;
-    }
-
-    span:first-child {
-      margin-bottom: 49px;
-    }
   }
 
   &-form {
@@ -89,5 +72,18 @@
       outline: 0;
       border: 1px solid $denim;
     }
+  }
+
+}
+
+@media (max-width: 1350px) {
+  .new-transfer {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 576px) {
+  .new-transfer {
+    padding: 25px 15px;
   }
 }

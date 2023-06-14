@@ -14,6 +14,14 @@ import { DetailsHeaderComponent } from './components/details-header/details-head
 import { NewTransferComponent } from './pages/account-info-page/new-transfer/new-transfer.component';
 import { BalanceDynamicsComponent } from './components/balance-dynamics/balance-dynamics.component';
 import { TransferHistoryComponent } from './components/transfer-history/transfer-history.component';
+import { DetailsPageComponent } from './pages/details-page/details-page.component';
+import { ExchangePageComponent } from './pages/exchange-page/exchange-page.component';
+import { CurrencyComponent } from './pages/exchange-page/currency/currency.component';
+import { ExchangeFormComponent } from './pages/exchange-page/exchange-form/exchange-form.component';
+import { RateStreamComponent } from './pages/exchange-page/rate-stream/rate-stream.component';
+import { AtmPageComponent } from './pages/atm-page/atm-page.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -26,12 +34,21 @@ import { TransferHistoryComponent } from './components/transfer-history/transfer
     DetailsHeaderComponent,
     NewTransferComponent,
     BalanceDynamicsComponent,
-    TransferHistoryComponent
+    TransferHistoryComponent,
+    DetailsPageComponent,
+    ExchangePageComponent,
+    CurrencyComponent,
+    ExchangeFormComponent,
+    RateStreamComponent,
+    AtmPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,16 +15,20 @@
   }
 }
 
+.scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .transfer-table {
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-width: 841px;
   min-height: 190px;
 
   &__thead {
-    min-height: 64px;
-    padding: 20px 50px;
-    //margin-bottom: 21px;
+    padding: 10px 50px;
     background-color: $mainGreen;
     border-radius: 15px;
   }
@@ -36,25 +40,29 @@
 
 .thead {
   &__tr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     @include h3;
-    font-size: 20px;
+    font-size: 18px;
     color: $white;
-    margin-right: 50px;
   }
 
   &__td {
     display: inline-block;
-    width: 200px;
-    margin-right: 80px;
+    width: calc((100% - 150px) / 4);
   }
+
 }
 
 .tbody {
   &__tr {
     width: 100%;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     @include cardText;
-    margin-right: 50px;
+    font-size: 14px;
     padding: 21px 50px 26px;
     color: $secondaryBlack;
     border-bottom: 1px solid $mainGreen;
@@ -62,7 +70,72 @@
 
   &__td {
     display: inline-block;
-    width: 200px;
-    margin-right: 80px;
+    width: calc((100% - 150px) / 4);
+  }
+}
+
+@media (max-width: 1350px) {
+  .transfer-history {
+    padding: 25px 25px;
+
+  }
+  .transfer-table {
+    &__thead {
+      padding: 10px 25px;
+    }
+  }
+  .thead {
+    &__tr {
+      font-size: 16px;
+    }
+
+    &__td {
+      width: calc((100% - 120px) / 4);
+    }
+
+  }
+  .tbody {
+    &__tr {
+      padding: 21px 25px;
+    }
+
+    &__td {
+      width: calc((100% - 120px) / 4);
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+
+  .transfer-table {
+
+    &__thead {
+      padding: 10px 15px;
+    }
+
+    &__tbody {
+      padding: 10px 15px;
+    }
+  }
+  .thead {
+    &__tr {
+      font-size: 14px;
+    }
+
+    &__td {
+      width: calc((100% - 60px) / 4);
+    }
+
+  }
+  .tbody {
+    &__tr {
+      padding: 15px 0;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    &__td {
+      width: calc((100% - 60px) / 4);
+    }
   }
 }
