@@ -1,9 +1,10 @@
-<div>
+<div
+  *ngIf="accounts$ as accounts; else loading"
+>
   <div class="accounts-header">
     <h2 class="accounts-header__title">Ваши счета</h2>
     <form class="accounts-header__form">
       <div class="accounts-header__select sort__type">
-<!--        <button class="contact__name">Сортировка</button>-->
         <select class="contact__name">
           <option class="contact__item">По номеру</option>
           <option class="contact__item">По номеру</option>
@@ -12,15 +13,19 @@
           <option class="contact__item">По умолчанию</option>
         </select>
       </div>
-      <button class="accounts-header__btn">Создать новый счет</button>
+      <button
+        (click)="createNewAccount()"
+        class="accounts-header__btn">Создать новый счет</button>
     </form>
   </div>
   <ul class="accounts-list">
-    <app-account class="accounts-list__item card"></app-account>
-    <app-account class="accounts-list__item card"></app-account>
-    <app-account class="accounts-list__item card"></app-account>
-    <app-account class="accounts-list__item card"></app-account>
-    <app-account class="accounts-list__item card"></app-account>
-    <app-account class="accounts-list__item card"></app-account>
+    <app-account
+      *ngFor="let account of accounts"
+      [account]="account"
+      class="accounts-list__item card"></app-account>
   </ul>
 </div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

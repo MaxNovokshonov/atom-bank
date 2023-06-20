@@ -1,13 +1,15 @@
 <div class="bill-details">
 <div class="bill-details__wrapper">
   <h2 class="bill-details__title">{{title}}</h2>
-  <a class="bill-details__btn">Вернуться назад</a>
+  <a
+    routerLink="/accounts"
+    class="bill-details__btn">Вернуться назад</a>
 </div>
   <div class="info">
-    <h3 class="info__number">№ 74213041477477406320783754</h3>
+    <h3 class="info__number">№ {{account.account}}</h3>
     <div class="info__wrapper">
       <span class="info__description">Баланс:</span>
-      <span class="info__balance">1600801 ₽</span>
+      <span class="info__balance">{{account.balance | currency: 'RUB':'symbol-narrow'}}</span>
     </div>
   </div>
 </div>

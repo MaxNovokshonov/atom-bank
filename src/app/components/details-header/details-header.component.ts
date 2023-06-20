@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Account} from "../../interfaces/interfaces";
 
 @Component({
   selector: 'app-details-header',
@@ -7,4 +8,5 @@ import {Component, Input} from '@angular/core';
 })
 export class DetailsHeaderComponent {
   @Input() title = '';
+  @Input() account: Account;
 }

@@ -15,6 +15,10 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${BASE_URL}login`, user)
   }
 
+  get token() {
+    return localStorage.getItem('token')
+  }
+
   logout() {
     localStorage.clear();
   }

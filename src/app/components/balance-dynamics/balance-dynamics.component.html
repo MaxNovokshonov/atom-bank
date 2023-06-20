@@ -1,7 +1,4 @@
 <div class="balance-dynamics">
   <h2 class="balance-dynamics__title">{{title}}</h2>
-<!--  <div class="balance-dynamics__wrapper">-->
-<!--    <canvas width="100%" height="100%"></canvas>-->
-<!--  </div>-->
-    <canvas class="balance-dynamics__wrapper"></canvas>
+  <div echarts [options]="chartOption" class="balance-dynamics__wrapper"></div>
 </div>

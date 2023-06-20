@@ -9,3 +9,45 @@ export interface AuthResponse {
   } | null;
   error: string
 }
+
+export interface AccountsResponse {
+  error: string;
+  payload: Account[]
+}
+
+export interface AccountResponse {
+  error: string;
+  payload: Account
+}
+
+export interface Account {
+  account: string,
+  balance: number,
+  mine: boolean,
+  transactions: Transactions[]
+}
+
+export interface Transactions {
+  amount: number,
+  date: Date,
+  from: string,
+  to: string
+}
+
+export interface BalanceDict {
+  [key: number]: {
+    [key: number]: {
+      from: number,
+      to: number,
+    };
+  }
+}
+
+export interface Transfer {
+  from: string,
+  to: string,
+  amount: string,
+}
+
+
+

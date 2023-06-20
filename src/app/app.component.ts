@@ -7,16 +7,10 @@ import {Router} from "@angular/router";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'AtomBank';
-  constructor(private authService: AuthService, private router: Router) {
+
+  constructor() {
   }
 
-  ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['accounts'])
-    } else {
-      this.router.navigate(['/'])
-    }
-  }
 }

@@ -4,6 +4,7 @@
 .new-transfer {
   @include grayBlock;
   width: 100%;
+  height: 100%;
   min-height: 288px;
   padding: 25px 50px;
 
@@ -23,6 +24,13 @@
     @include label;
     display: block;
     color: $errorGray;
+
+    &-invalid {
+      @include label;
+      font-size: 12px;
+      display: block;
+      color: $errorGray;
+    }
   }
 
   &-form {
@@ -40,10 +48,10 @@
       width: 100%;
       min-height: 44px;
       padding-left: 16px;
-      margin: 0 0 25px;
       border: 1px solid $grayChateau;
       border-radius: 7px;
     }
+
 
     &__input::placeholder {
       @include placeholder;
@@ -74,6 +82,30 @@
     }
   }
 
+}
+
+.input-wrapper {
+  width: 100%;
+  margin: 0 0 25px;
+}
+
+.error {
+  border: 1px solid $errorGray;
+}
+
+.dropdown {
+  position: absolute;
+  max-height: 300px;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: $white;
+  border: 1px solid $grayChateau;
+  border-radius: 7px;
+
+  &-item {
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
 }
 
 @media (max-width: 1350px) {

@@ -1,5 +1,5 @@
 
-import { NgModule } from '@angular/core';
+import {NgModule, Provider} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +21,19 @@ import { ExchangeFormComponent } from './pages/exchange-page/exchange-form/excha
 import { RateStreamComponent } from './pages/exchange-page/rate-stream/rate-stream.component';
 import { AtmPageComponent } from './pages/atm-page/atm-page.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthInterceptor} from "./services/auth.interceptor";
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
+import { IncludesPipe } from './services/includes.pipe';
+
+const INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor,
+};
 
 @NgModule({
   declarations: [
@@ -40,7 +52,10 @@ import {HttpClientModule} from "@angular/common/http";
     CurrencyComponent,
     ExchangeFormComponent,
     RateStreamComponent,
-    AtmPageComponent
+    AtmPageComponent,
+    NotFoundPageComponent,
+    LoaderComponent,
+    IncludesPipe
   ],
   imports: [
     BrowserModule,
@@ -49,8 +64,9 @@ import {HttpClientModule} from "@angular/common/http";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxEchartsModule.forRoot({ echarts }),
   ],
-  providers: [],
+  providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

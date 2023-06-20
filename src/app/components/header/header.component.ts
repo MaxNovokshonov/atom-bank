@@ -17,11 +17,7 @@ export class HeaderComponent {
   }
 
   isAuth() {
-    if (this.authService.isAuthenticated()) {
-      return true
-    } else {
-      return false
-    }
+    return this.authService.isAuthenticated()
   }
 
   logout() {

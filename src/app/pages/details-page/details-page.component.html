@@ -1,6 +1,16 @@
-<app-details-header title="История баланса"></app-details-header>
-<div class="balance-history">
-  <app-balance-dynamics title="Динамика баланса"></app-balance-dynamics>
-  <app-balance-dynamics title="Соотношение входящих исходящих транзакций"></app-balance-dynamics>
-  <app-transfer-history></app-transfer-history>
+<div
+  *ngIf="account$ as account; else loading"
+>
+  <app-details-header title="История баланса" [account]="account"></app-details-header>
+  <div class="balance-history">
+    <app-balance-dynamics title="Динамика баланса" [id]="account.account"
+                          [transactions]="allTransactions"></app-balance-dynamics>
+    <app-balance-dynamics title="Соотношение входящих исходящих транзакций" [id]="account.account"
+                          [transactions]="allTransactions"></app-balance-dynamics>
+    <app-transfer-history [transactions]="lastTransactions"></app-transfer-history>
+  </div>
 </div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

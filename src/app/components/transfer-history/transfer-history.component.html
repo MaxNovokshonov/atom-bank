@@ -11,53 +11,13 @@
       </tr>
       </thead>
       <tbody class="transfer-table__tbody tbody">
-      <tr class="tbody__tr">
-        <td class="tbody__td">61723711033564425174344835</td>
-        <td class="tbody__td">74213041477477406320783754</td>
-        <td class="tbody__td">+ 969.68 ₽</td>
-        <td class="tbody__td">06 июнь 2023</td>
-      </tr>
-      <tr class="tbody__tr">
-        <td class="tbody__td">61723711033564425174344835</td>
-        <td class="tbody__td">74213041477477406320783754</td>
-        <td class="tbody__td">+ 969.68 ₽</td>
-        <td class="tbody__td">06 июнь 2023</td>
-      </tr>
-      <tr class="tbody__tr">
-        <td class="tbody__td">61723711033564425174344835</td>
-        <td class="tbody__td">74213041477477406320783754</td>
-        <td class="tbody__td">+ 969.68 ₽</td>
-        <td class="tbody__td">06 июнь 2023</td>
-      </tr>
-      <tr class="tbody__tr">
-        <td class="tbody__td">61723711033564425174344835</td>
-        <td class="tbody__td">74213041477477406320783754</td>
-        <td class="tbody__td">+ 969.68 ₽</td>
-        <td class="tbody__td">06 июнь 2023</td>
-      </tr>
-      <tr class="tbody__tr">
-        <td class="tbody__td">61723711033564425174344835</td>
-        <td class="tbody__td">74213041477477406320783754</td>
-        <td class="tbody__td">+ 969.68 ₽</td>
-        <td class="tbody__td">06 июнь 2023</td>
-      </tr>
-      <tr class="tbody__tr">
-        <td class="tbody__td">61723711033564425174344835</td>
-        <td class="tbody__td">74213041477477406320783754</td>
-        <td class="tbody__td">+ 969.68 ₽</td>
-        <td class="tbody__td">06 июнь 2023</td>
-      </tr>
-      <tr class="tbody__tr">
-        <td class="tbody__td">61723711033564425174344835</td>
-        <td class="tbody__td">74213041477477406320783754</td>
-        <td class="tbody__td">+ 969.68 ₽</td>
-        <td class="tbody__td">06 июнь 2023</td>
-      </tr>
-      <tr class="tbody__tr">
-        <td class="tbody__td">61723711033564425174344835</td>
-        <td class="tbody__td">74213041477477406320783754</td>
-        <td class="tbody__td">+ 969.68 ₽</td>
-        <td class="tbody__td">06 июнь 2023</td>
+      <tr
+        *ngFor="let transaction of transactions"
+        class="tbody__tr">
+        <td class="tbody__td">{{transaction.from}}</td>
+        <td class="tbody__td">{{transaction.to}}</td>
+        <td class="tbody__td">+ {{transaction.amount}} ₽</td>
+        <td class="tbody__td">{{transaction.date | date:'mediumDate'}}</td>
       </tr>
       </tbody>
     </table>

@@ -2,7 +2,8 @@
 
 .balance-dynamics {
   width: 100%;
-  height: 325px;
+  height: 100%;
+  min-height: 325px;
   padding: 25px 50px;
   border-radius: 20px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
@@ -15,7 +16,6 @@
   }
 
   &__wrapper {
-    //position: relative;
     width: 100%;
     height: 80%;
   }
