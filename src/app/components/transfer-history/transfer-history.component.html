@@ -16,7 +16,10 @@
         class="tbody__tr">
         <td class="tbody__td">{{transaction.from}}</td>
         <td class="tbody__td">{{transaction.to}}</td>
-        <td class="tbody__td">+ {{transaction.amount}} ₽</td>
+        <td
+          [class.input-transfer]="id == transaction.to"
+          [class.output-transfer]="id != transaction.to"
+          class="tbody__td">{{transaction.amount}} ₽</td>
         <td class="tbody__td">{{transaction.date | date:'mediumDate'}}</td>
       </tr>
       </tbody>

@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {Account, AccountResponse, AccountsResponse, Transfer} from "../interfaces/interfaces";
+import {
+  Account,
+  AccountResponse,
+  AccountsResponse,
+  CurrencyResponse,
+  Transfer
+} from "../interfaces/interfaces";
 
 const BASE_URL = 'http://localhost:3000/'
 
@@ -26,5 +32,13 @@ export class DataService {
 
   createTransfer(data: Transfer): Observable<AccountResponse> {
     return this.http.post<AccountResponse>(`${BASE_URL}transfer-funds`, data)
+  }
+
+  getAllCurrencies(): Observable<CurrencyResponse> {
+    return this.http.get<CurrencyResponse>(`${BASE_URL}currencies`)
+  }
+
+  openWebsocket() {
+
   }
 }

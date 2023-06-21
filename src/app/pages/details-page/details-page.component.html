@@ -7,7 +7,7 @@
                           [transactions]="allTransactions"></app-balance-dynamics>
     <app-balance-dynamics title="Соотношение входящих исходящих транзакций" [id]="account.account"
                           [transactions]="allTransactions"></app-balance-dynamics>
-    <app-transfer-history [transactions]="lastTransactions"></app-transfer-history>
+    <app-transfer-history [transactions]="lastTransactions" [id]="account.account"></app-transfer-history>
   </div>
 </div>
 

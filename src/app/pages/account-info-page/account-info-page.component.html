@@ -16,7 +16,10 @@
         [routerLink]="['/details', account.account]"
       ></app-balance-dynamics>
     </div>
-    <app-transfer-history [transactions]="lastTransactions"></app-transfer-history>
+    <app-transfer-history
+      [transactions]="lastTransactions"
+      [id]="account.account"
+    ></app-transfer-history>
   </div>
 </div>
 

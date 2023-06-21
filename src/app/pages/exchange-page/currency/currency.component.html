@@ -1,35 +1,20 @@
 <div class="exchange-left__top currency">
-  <h3 class="currency__title">Ваши валюты</h3>
-  <ul class="currency__list">
-    <li class="currency__item">
-      <span class="currency__item-name">AUD</span>
-      <span class="currency__item-dotted"></span>
-      <span class="currency__item-count">32.06589400693413</span>
-    </li>
-    <li class="currency__item">
-      <span class="currency__item-name">USD</span>
-      <span class="currency__item-dotted"></span>
-      <span class="currency__item-count">32.0658940</span>
-    </li>
-    <li class="currency__item">
-      <span class="currency__item-name">AUD</span>
-      <span class="currency__item-dotted"></span>
-      <span class="currency__item-count">32.06589400693413</span>
-    </li>
-    <li class="currency__item">
-      <span class="currency__item-name">AUD</span>
-      <span class="currency__item-dotted"></span>
-      <span class="currency__item-count">32.06589400693413</span>
-    </li>
-    <li class="currency__item">
-      <span class="currency__item-name">AUD</span>
-      <span class="currency__item-dotted"></span>
-      <span class="currency__item-count">32.06589400693413</span>
-    </li>
-    <li class="currency__item">
-      <span class="currency__item-name">AUD</span>
-      <span class="currency__item-dotted"></span>
-      <span class="currency__item-count">32.06589400693413</span>
-    </li>
-  </ul>
+  <div
+  *ngIf="currencies$; else loading"
+  >
+    <h3 class="currency__title">Ваши валюты</h3>
+    <ul class="currency__list">
+      <li
+        *ngFor="let currency of currencies$"
+        class="currency__item">
+        <span class="currency__item-name">{{currency.code}}</span>
+        <span class="currency__item-dotted"></span>
+        <span class="currency__item-count">{{currency.amount}}</span>
+      </li>
+    </ul>
+  </div>
 </div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

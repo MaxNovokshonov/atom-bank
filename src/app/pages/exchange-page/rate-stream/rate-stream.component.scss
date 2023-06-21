@@ -62,7 +62,7 @@
     }
   }
 
-  &__item:not(:nth-last-child(-n + 21)) {
+  &__item:not(:nth-last-child(-n + 25)) {
     display: none;
   }
 

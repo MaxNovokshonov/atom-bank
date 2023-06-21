@@ -7,5 +7,6 @@ import {Transactions} from "../../interfaces/interfaces";
   styleUrls: ['./transfer-history.component.scss']
 })
 export class TransferHistoryComponent {
-  @Input() transactions: Transactions[]
+  @Input() transactions: Transactions[];
+  @Input() id: string;
 }

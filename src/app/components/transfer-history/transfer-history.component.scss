@@ -74,6 +74,14 @@
   }
 }
 
+.input-transfer {
+  color: $mainGreen;
+}
+
+.output-transfer {
+  color: $errorGray;
+}
+
 @media (max-width: 1350px) {
   .transfer-history {
     padding: 25px 25px;

@@ -21,6 +21,7 @@ export class AccountsPageComponent implements OnInit {
   getAccounts() {
     this.dataService.getAllAccounts().subscribe((response) => {
       this.accounts$ = response.payload
+      console.log(this.accounts$)
     })
   }
 

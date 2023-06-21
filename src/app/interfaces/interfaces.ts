@@ -49,5 +49,24 @@ export interface Transfer {
   amount: string,
 }
 
+export interface CurrencyItem {
+  amount: number,
+  code: string,
+}
+
+export interface CurrencyResponse {
+  error: string;
+  payload: {
+    [key: string]: CurrencyItem
+  }
+}
+
+export interface WebSocketMessage {
+  type: string,
+  from: string,
+  to: string,
+  rate: number,
+  change: number
+}
 
 
