@@ -4,52 +4,50 @@ import {AnonymousSubject} from 'rxjs/internal/Subject';
 import {map} from 'rxjs/operators';
 import {WebSocketMessage} from "../interfaces/interfaces";
 
-const WS_URL = 'ws://localhost:3000/currency-feed';
+// const WS_URL = 'ws://localhost:3000/currency-feed';
+const WS_URL = 'ws://coin-maxnovokshonov.amvera.io/currency-feed'
 
 @Injectable()
 export class WebsocketService {
 
-  subject: AnonymousSubject<MessageEvent>;
-  public messages: Subject<WebSocketMessage>;
+  subject: Subject<MessageEvent>;
+  public messages: Observable<WebSocketMessage>;
+  websocket = new WebSocket(WS_URL);
 
   constructor() {
-    this.messages = <Subject<WebSocketMessage>>this.connect(WS_URL).pipe(
+    this.messages = this.connect(WS_URL).pipe(
       map(
         (response: MessageEvent): WebSocketMessage => {
-          // console.log(response.data)
           return JSON.parse(response.data);
         }
       )
     );
   }
 
-  connect(url: string): AnonymousSubject<MessageEvent> {
+  closeWebsocket() {
+    this.websocket.close()
+  }
+
+  connect(url: string): Subject<MessageEvent> {
     if (!this.subject) {
-      this.subject = this.create(url);
-      console.log("Successfully connected: " + url);
+      this.subject = this.openWebsocket(url);
     }
     return this.subject;
   }
 
-  private create(url: string): AnonymousSubject<MessageEvent> {
-    let ws = new WebSocket(url);
+
+  openWebsocket(url: string): AnonymousSubject<MessageEvent> {
     let observable = new Observable((obs: Observer<MessageEvent>) => {
-      ws.onmessage = obs.next.bind(obs);
-      ws.onerror = obs.error.bind(obs);
-      ws.onclose = obs.complete.bind(obs);
-      return ws.close.bind(ws);
+      this.websocket.onmessage = obs.next.bind(obs);
+      this.websocket.onerror = obs.error.bind(obs);
+      this.websocket.onclose = obs.complete.bind(obs);
+      return this.websocket.close.bind(this.websocket);
     });
     let observer = {
-      error: null,
-      complete: null,
-      next: (data: Object) => {
-        console.log('Message sent to websocket: ', data);
-        if (ws.readyState === WebSocket.OPEN) {
-          ws.send(JSON.stringify(data));
-        }
-      }
+      error: (err: any) => {},
+      complete: () => {},
+      next: (data: Object) => {}
     };
-    // @ts-ignore
     return new AnonymousSubject<MessageEvent>(observer, observable);
   }
 

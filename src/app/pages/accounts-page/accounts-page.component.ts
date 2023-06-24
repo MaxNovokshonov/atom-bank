@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {DataService} from "../../services/data.service";
 import {Account, AccountsResponse} from "../../interfaces/interfaces";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-accounts-page',
@@ -10,10 +11,16 @@ import {Account, AccountsResponse} from "../../interfaces/interfaces";
 })
 export class AccountsPageComponent implements OnInit {
   accounts$: Account[];
+  sortForm = new FormGroup({
+    select: new FormControl('default'),
+  })
 
   constructor(private dataService: DataService) {
   }
 
+  get select() {
+    return this.sortForm.controls.select as FormControl;
+  }
   ngOnInit(): void {
     this.getAccounts()
   }
@@ -30,5 +37,6 @@ export class AccountsPageComponent implements OnInit {
       this.getAccounts()
     })
   }
+
 
 }

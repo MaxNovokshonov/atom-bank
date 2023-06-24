@@ -1,22 +1,24 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {
   Account,
   AccountResponse,
-  AccountsResponse,
+  AccountsResponse, Atm, AtmResponse, CodesResponse,
   CurrencyResponse,
   Transfer
 } from "../interfaces/interfaces";
 
-const BASE_URL = 'http://localhost:3000/'
+// const BASE_URL = 'http://localhost:3000/'
+const BASE_URL = 'https://coin-maxnovokshonov.amvera.io/'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getAllAccounts(): Observable<AccountsResponse> {
     return this.http.get<AccountsResponse>(`${BASE_URL}accounts`)
@@ -38,7 +40,16 @@ export class DataService {
     return this.http.get<CurrencyResponse>(`${BASE_URL}currencies`)
   }
 
-  openWebsocket() {
-
+  getCurrenciesCodes(): Observable<CodesResponse> {
+    return this.http.get<CodesResponse>(`${BASE_URL}all-currencies`)
   }
+
+  createExchange(data: Transfer): Observable<CurrencyResponse> {
+    return this.http.post<CurrencyResponse>(`${BASE_URL}currency-buy`, data)
+  }
+
+  getAtmCoordinates(): Observable<AtmResponse> {
+    return this.http.get<AtmResponse>(`${BASE_URL}banks`)
+  }
+
 }

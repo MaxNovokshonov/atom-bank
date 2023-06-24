@@ -11,6 +11,8 @@
 }
 
 .exchange-form {
+  height: 100%;
+
   &__title {
     @include currencyBlockText;
     margin-bottom: 25px;
@@ -27,6 +29,13 @@
     display: block;
     margin-bottom: 25px;
     color: $errorGray;
+  }
+
+  &__success {
+    @include label;
+    display: block;
+    margin-bottom: 25px;
+    color: $mainGreen;
   }
 }
 
@@ -87,6 +96,17 @@
     input:focus-visible {
       outline: 0;
       border: 1px solid $denim;
+    }
+
+    &-wrapper {
+      width: 100%;
+    }
+
+    &-invalid {
+      @include label;
+      font-size: 12px;
+      display: block;
+      color: $errorGray;
     }
   }
 

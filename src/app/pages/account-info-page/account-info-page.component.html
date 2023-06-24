@@ -10,6 +10,7 @@
         (transferDone)="getAccountById()"
       ></app-new-transfer>
       <app-balance-dynamics
+        class="pointer"
         title="Динамика баланса"
         [id]="account.account"
         [transactions]="allTransactions"
@@ -17,8 +18,10 @@
       ></app-balance-dynamics>
     </div>
     <app-transfer-history
+      class="pointer"
       [transactions]="lastTransactions"
       [id]="account.account"
+      [routerLink]="['/details', account.account]"
     ></app-transfer-history>
   </div>
 </div>

@@ -9,7 +9,7 @@ import {WebSocketMessage} from "../../../interfaces/interfaces";
   providers: [WebsocketService]
 })
 export class RateStreamComponent implements OnInit, OnDestroy{
-  received: WebSocketMessage[] = [];
+  receivedMessages: WebSocketMessage[] = [];
 
   constructor(private WebsocketService: WebsocketService) {
   }
@@ -19,17 +19,14 @@ export class RateStreamComponent implements OnInit, OnDestroy{
 
   openWebsocket() {
     this.WebsocketService.messages.subscribe(message => {
-      console.log(this.received)
-      return this.received.unshift(message);
+      // console.log(this.received)
+      return this.receivedMessages.unshift(message);
     });
   }
 
-  closeWebsocket() {
-    this.WebsocketService.messages.unsubscribe()
-  }
 
   ngOnDestroy(): void {
-    this.closeWebsocket()
+    this.WebsocketService.closeWebsocket()
   }
 
 

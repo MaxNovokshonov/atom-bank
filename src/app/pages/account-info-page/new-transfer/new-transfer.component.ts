@@ -18,6 +18,7 @@ export class NewTransferComponent {
   })
 
   errorMessage = '';
+  successMessage = '';
   isDropdownOpen = false;
   toValue: string;
 
@@ -59,7 +60,11 @@ export class NewTransferComponent {
     this.dataService.createTransfer(transfer).subscribe((response) => {
       if (response.payload) {
         this.transferForm.reset();
-        this.transferDone.emit(response)
+        this.transferDone.emit(response);
+        this.successMessage = 'Перевод успешно выполнен';
+        setTimeout(() => {
+          this.successMessage = ''
+        }, 2000)
       } else {
         this.transferForm.reset();
         switch (response?.error) {

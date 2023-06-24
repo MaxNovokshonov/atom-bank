@@ -1,9 +1,12 @@
-.balance-history {
-  padding: 0 50px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  gap: 40px;
+.balance {
+  &-history {
+    padding: 0 50px;
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 40px;
+  }
 }
 
 @media (max-width: 990px) {

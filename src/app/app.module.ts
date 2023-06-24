@@ -28,6 +28,8 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { IncludesPipe } from './services/includes.pipe';
+import {AngularYandexMapsModule} from "angular8-yandex-maps";
+import { SortPipe } from './services/sort.pipe';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -55,7 +57,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
     AtmPageComponent,
     NotFoundPageComponent,
     LoaderComponent,
-    IncludesPipe
+    IncludesPipe,
+    SortPipe
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     FormsModule,
     ReactiveFormsModule,
     NgxEchartsModule.forRoot({ echarts }),
+    AngularYandexMapsModule
   ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]

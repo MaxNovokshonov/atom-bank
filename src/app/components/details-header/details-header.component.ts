@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Account} from "../../interfaces/interfaces";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-details-header',
@@ -9,4 +10,11 @@ import {Account} from "../../interfaces/interfaces";
 export class DetailsHeaderComponent {
   @Input() title = '';
   @Input() account: Account;
+
+  constructor(private location: Location) {
+  }
+
+  goBack() {
+    this.location.back()
+  }
 }

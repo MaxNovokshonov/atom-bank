@@ -1,49 +1,57 @@
 <div class="exchange-left__bottom exchange-form">
-  <h3 class="exchange-form__title">Обмен валюты</h3>
-  <form class="exchange-form__wrapper">
-    <!--      <div class="change-form__select">-->
-    <!--        <div class="select__wrapper">-->
-    <!--          <label>Из</label>-->
-    <!--          <select class="select-wrapper select-from">-->
-    <!--            <option value="">AUD</option>-->
-    <!--            <option value="">AUD</option>-->
-    <!--            <option value="">AUD</option>-->
-    <!--            <option value="">AUD</option>-->
-    <!--          </select>-->
-    <!--        </div>-->
-    <!--        <div class="select__wrapper">-->
-    <!--          <label>В</label>-->
-    <!--          <select class="select-wrapper select-in">-->
-    <!--            <option value="">AUD</option>-->
-    <!--            <option value="">AUD</option>-->
-    <!--            <option value="">AUD</option>-->
-    <!--            <option value="">AUD</option>-->
-    <!--          </select>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <div class="change-form__input">
-      <label>Из</label>
-      <select>
-        <option value="">AUD</option>
-        <option value="">AUD</option>
-        <option value="">AUD</option>
-        <option value="">AUD</option>
-      </select>
-    </div>
-    <div class="change-form__input">
-      <label>В</label>
-      <select>
-        <option value="">USD</option>
-        <option value="">USD</option>
-        <option value="">USD</option>
-        <option value="">USD</option>
-      </select>
-    </div>
-    <div class="change-form__input">
-      <label>Сумма</label>
-      <input type="text" placeholder="Введите сумму">
-    </div>
-    <button class="change-form__btn" type="submit">Обменять</button>
-  </form>
-  <span class="exchange-form__error">Ошибка</span>
+  <div
+    *ngIf="codes$; else loading"
+  >
+    <h3 class="exchange-form__title">Обмен валюты</h3>
+    <form
+      [formGroup]="exchangeForm"
+      (ngSubmit)="submit()"
+      class="exchange-form__wrapper">
+      <div class="change-form__input">
+        <label>Из</label>
+        <select
+          formControlName="from"
+        >
+          <option *ngFor="let code of codes$" [ngValue]="code">
+            {{ code }}
+          </option>
+        </select>
+      </div>
+      <div class="change-form__input">
+        <label>В</label>
+        <select
+          formControlName="to"
+        >
+          <option *ngFor="let code of codes$" [ngValue]="code">
+            {{ code }}
+          </option>
+        </select>
+      </div>
+      <div class="change-form__input">
+        <label>Сумма</label>
+        <div class="change-form__input-wrapper">
+          <input
+            formControlName="amount"
+            type="text" placeholder="Введите сумму">
+          <span
+            *ngIf="amount.errors?.['required'] && (amount.dirty || amount.touched)"
+            class="change-form__input-invalid">Поле обязательно для заполнения</span>
+          <span
+            *ngIf="amount.errors?.['pattern'] && (amount.dirty || amount.touched)"
+            class="change-form__input-invalid">Допускаются только цифры</span>
+        </div>
+      </div>
+
+      <button
+        [disabled]="exchangeForm.invalid"
+        class="change-form__btn" type="submit">Обменять
+      </button>
+    </form>
+    <span class="exchange-form__error">{{errorMessage}}</span>
+    <span class="exchange-form__success">{{successMessage}}</span>
+  </div>
 </div>
+
+<ng-template #loading>
+  <app-loader></app-loader>
+</ng-template>

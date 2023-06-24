@@ -69,4 +69,19 @@ export interface WebSocketMessage {
   change: number
 }
 
+export interface CodesResponse {
+  error: string,
+  payload: string[]
+}
+
+export interface Atm {
+  lat: number,
+  lon: number
+}
+
+export interface AtmResponse {
+  error: string,
+  payload: Atm[]
+}
+
 

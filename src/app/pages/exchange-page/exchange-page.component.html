@@ -2,8 +2,8 @@
   <h2 class="exchange__title">Валютный обмен</h2>
   <div class="exchange__wrapper">
     <div class="exchange-left">
-      <app-currency></app-currency>
-      <app-exchange-form></app-exchange-form>
+      <app-currency [currencies$]="currencies$"></app-currency>
+      <app-exchange-form (exchangeDone)="getCurrencies()"></app-exchange-form>
     </div>
     <app-rate-stream></app-rate-stream>
   </div>

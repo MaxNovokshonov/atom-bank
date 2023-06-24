@@ -3,14 +3,26 @@
 >
   <div class="accounts-header">
     <h2 class="accounts-header__title">Ваши счета</h2>
-    <form class="accounts-header__form">
+    <form
+      [formGroup]="sortForm"
+      class="accounts-header__form">
       <div class="accounts-header__select sort__type">
-        <select class="contact__name">
-          <option class="contact__item">По номеру</option>
-          <option class="contact__item">По номеру</option>
-          <option class="contact__item">По балансу</option>
-          <option class="contact__item">По последней транзакции</option>
-          <option class="contact__item">По умолчанию</option>
+        <select
+          formControlName="select"
+          class="contact__name">
+          <option
+            ngValue="default"
+            disabled
+            class="contact__item">Сортировка</option>
+          <option
+            ngValue="account"
+            class="contact__item">По номеру</option>
+          <option
+            ngValue="balance"
+            class="contact__item">По балансу</option>
+          <option
+            ngValue="transaction"
+            class="contact__item">По транзакциям</option>
         </select>
       </div>
       <button
@@ -20,7 +32,7 @@
   </div>
   <ul class="accounts-list">
     <app-account
-      *ngFor="let account of accounts"
+      *ngFor="let account of accounts | sort:select.value"
       [account]="account"
       class="accounts-list__item card"></app-account>
   </ul>

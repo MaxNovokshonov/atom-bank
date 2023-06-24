@@ -33,6 +33,12 @@
     }
   }
 
+  &__success {
+    @include label;
+    display: block;
+    color: $mainGreen;
+  }
+
   &-form {
     position: relative;
     width: 100%;

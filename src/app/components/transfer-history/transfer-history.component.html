@@ -20,7 +20,7 @@
           [class.input-transfer]="id == transaction.to"
           [class.output-transfer]="id != transaction.to"
           class="tbody__td">{{transaction.amount}} ₽</td>
-        <td class="tbody__td">{{transaction.date | date:'mediumDate'}}</td>
+        <td class="tbody__td">{{transaction.date | date:'dd.MM.yyyy    HH:mm:ss'}}</td>
       </tr>
       </tbody>
     </table>
