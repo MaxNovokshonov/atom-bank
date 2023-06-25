@@ -3,7 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AuthResponse, User} from "../interfaces/interfaces";
 
-const BASE_URL = 'http://localhost:3000/'
+// const BASE_URL = 'http://localhost:3000/'
+const BASE_URL = 'https://coin-maxnovokshonov.amvera.io/'
 @Injectable({
   providedIn: 'root'
 })

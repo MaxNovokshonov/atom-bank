@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import {WebSocketMessage} from "../interfaces/interfaces";
 
 // const WS_URL = 'ws://localhost:3000/currency-feed';
-const WS_URL = 'ws://coin-maxnovokshonov.amvera.io/currency-feed'
+const WS_URL = 'wss://coin-maxnovokshonov.amvera.io/currency-feed'
 
 @Injectable()
 export class WebsocketService {

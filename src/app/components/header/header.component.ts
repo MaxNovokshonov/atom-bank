@@ -16,11 +16,15 @@ export class HeaderComponent {
     this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 
+  closeMobileMenu() {
+    this.mobileMenuOpen = false;
+  }
   isAuth() {
     return this.authService.isAuthenticated()
   }
 
   logout() {
+    this.mobileMenuOpen = false;
     this.authService.logout()
   }
 }

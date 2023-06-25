@@ -6,16 +6,19 @@
        *ngIf="isAuth()"
   >
     <a class="nav__item"
+       (click)="closeMobileMenu()"
        routerLinkActive="active"
        routerLink="/atm"
     >Банкоматы</a>
     <a
       class="nav__item"
+      (click)="closeMobileMenu()"
       routerLinkActive="active"
       routerLink="/accounts"
     >Счета</a>
     <a
       class="nav__item"
+      (click)="closeMobileMenu()"
       routerLinkActive="active"
       routerLink="/exchange"
     >Валюта</a>

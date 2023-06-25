@@ -1,5 +1,5 @@
 <div
-  *ngIf="accounts$ as accounts; else loading"
+  *ngIf="accounts$ | async as accounts; else loading"
 >
   <div class="accounts-header">
     <h2 class="accounts-header__title">Ваши счета</h2>
