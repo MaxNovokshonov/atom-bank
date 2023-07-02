@@ -1,15 +1,11 @@
 <div class="exchange-left__top currency">
-  <div
-  *ngIf="currencies$; else loading"
-  >
+  <div *ngIf="currencies; else loading">
     <h3 class="currency__title">Ваши валюты</h3>
     <ul class="currency__list">
-      <li
-        *ngFor="let currency of currencies$"
-        class="currency__item">
-        <span class="currency__item-name">{{currency.code}}</span>
+      <li *ngFor="let currency of currencies" class="currency__item">
+        <span class="currency__item-name">{{ currency.code }}</span>
         <span class="currency__item-dotted"></span>
-        <span class="currency__item-count">{{currency.amount}}</span>
+        <span class="currency__item-count">{{ currency.amount }}</span>
       </li>
     </ul>
   </div>

@@ -1,5 +1,4 @@
-
-import {NgModule, Provider} from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,16 +19,17 @@ import { CurrencyComponent } from './pages/exchange-page/currency/currency.compo
 import { ExchangeFormComponent } from './pages/exchange-page/exchange-form/exchange-form.component';
 import { RateStreamComponent } from './pages/exchange-page/rate-stream/rate-stream.component';
 import { AtmPageComponent } from './pages/atm-page/atm-page.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthInterceptor} from "./services/auth.interceptor";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.interceptor';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { IncludesPipe } from './services/includes.pipe';
-import {AngularYandexMapsModule} from "angular8-yandex-maps";
+import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 import { SortPipe } from './services/sort.pipe';
+import { NoTransactionsComponent } from './components/no-transactions/no-transactions.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -58,7 +58,8 @@ const INTERCEPTOR_PROVIDER: Provider = {
     NotFoundPageComponent,
     LoaderComponent,
     IncludesPipe,
-    SortPipe
+    SortPipe,
+    NoTransactionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,9 +69,9 @@ const INTERCEPTOR_PROVIDER: Provider = {
     FormsModule,
     ReactiveFormsModule,
     NgxEchartsModule.forRoot({ echarts }),
-    AngularYandexMapsModule
+    AngularYandexMapsModule,
   ],
   providers: [INTERCEPTOR_PROVIDER],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

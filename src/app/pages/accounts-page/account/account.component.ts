@@ -1,16 +1,11 @@
-import {Component, Input} from '@angular/core';
-import {Account} from "../../../interfaces/interfaces";
-import {Router} from "@angular/router";
+import { Component, Input } from '@angular/core';
+import { Account } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent {
-
   @Input() account: Account;
-
-  constructor(private router: Router) {
-  }
 }

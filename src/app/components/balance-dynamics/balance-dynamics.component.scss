@@ -1,4 +1,4 @@
-@import "mixins";
+@import 'mixins';
 
 .balance-dynamics {
   width: 100%;
@@ -20,6 +20,7 @@
     height: 80%;
   }
 }
+
 @media (max-width: 1350px) {
   .balance-dynamics {
     padding: 25px;

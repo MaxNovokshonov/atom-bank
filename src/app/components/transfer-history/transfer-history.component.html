@@ -3,26 +3,31 @@
   <div class="scroll">
     <table class="transfer-table">
       <thead class="transfer-table__thead thead">
-      <tr class="thead__tr">
-        <td class="thead__td">Счёт отправителя</td>
-        <td class="thead__td">Счёт получателя</td>
-        <td class="thead__td">Сумма</td>
-        <td class="thead__td">Дата</td>
-      </tr>
+        <tr class="thead__tr">
+          <td class="thead__td">Счёт отправителя</td>
+          <td class="thead__td">Счёт получателя</td>
+          <td class="thead__td">Сумма</td>
+          <td class="thead__td">Дата</td>
+        </tr>
       </thead>
-      <tbody class="transfer-table__tbody tbody">
-      <tr
-        *ngFor="let transaction of transactions"
-        class="tbody__tr">
-        <td class="tbody__td">{{transaction.from}}</td>
-        <td class="tbody__td">{{transaction.to}}</td>
-        <td
-          [class.input-transfer]="id == transaction.to"
-          [class.output-transfer]="id != transaction.to"
-          class="tbody__td">{{transaction.amount}} ₽</td>
-        <td class="tbody__td">{{transaction.date | date:'dd.MM.yyyy    HH:mm:ss'}}</td>
-      </tr>
+      <tbody *ngIf="transactions.length; else NoTransactions" class="transfer-table__tbody tbody">
+        <tr *ngFor="let transaction of transactions" class="tbody__tr">
+          <td class="tbody__td">{{ transaction.from }}</td>
+          <td class="tbody__td">{{ transaction.to }}</td>
+          <td
+            [class.input-transfer]="id == transaction.to"
+            [class.output-transfer]="id != transaction.to"
+            class="tbody__td"
+          >
+            {{ transaction.amount }} ₽
+          </td>
+          <td class="tbody__td">{{ transaction.date | date : 'dd.MM.yyyy    HH:mm:ss' }}</td>
+        </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<ng-template #NoTransactions>
+  <app-no-transactions></app-no-transactions>
+</ng-template>

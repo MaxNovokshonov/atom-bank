@@ -1,11 +1,9 @@
-<div
-  *ngIf="account$ as account; else loading"
->
+<div *ngIf="account; else loading">
   <app-details-header title="Просмотр счёта" [account]="account"></app-details-header>
   <div class="transfer">
     <div class="transfer__wrapper">
       <app-new-transfer
-        [accounts]="allAccounts$"
+        [accounts]="allAccounts"
         [from]="account.account"
         (transferDone)="getAccountById()"
       ></app-new-transfer>

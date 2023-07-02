@@ -1,28 +1,41 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Account, Transfer} from "../../../interfaces/interfaces";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {DataService} from "../../../services/data.service";
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Transfer } from '../../../interfaces/interfaces';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DataService } from '../../../services/data.service';
+import { TransferError } from '../../../interfaces/transfer-error';
+import { merge, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-transfer',
   templateUrl: './new-transfer.component.html',
-  styleUrls: ['./new-transfer.component.scss']
+  styleUrls: ['./new-transfer.component.scss'],
 })
-export class NewTransferComponent {
+export class NewTransferComponent implements OnInit, OnDestroy {
   @Input() accounts: string[];
+
   @Input() from: string;
+
   @Output() transferDone = new EventEmitter();
+
   transferForm = new FormGroup({
     to: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]),
-    amount: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')])
-  })
+    amount: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]),
+  });
 
   errorMessage = '';
-  successMessage = '';
-  isDropdownOpen = false;
-  toValue: string;
 
-  constructor(private dataService: DataService) {
+  successMessage = '';
+
+  isDropdownOpen = false;
+
+  errorSubscription = new Subscription();
+
+  constructor(private dataService: DataService) {}
+
+  ngOnInit(): void {
+    this.errorSubscription.add(
+      merge(this.to.valueChanges, this.amount.valueChanges).subscribe(() => this.clearError()),
+    );
   }
 
   get to() {
@@ -42,7 +55,6 @@ export class NewTransferComponent {
     if (this.to.value == '') {
       this.isDropdownOpen = false;
     }
-    this.toValue = this.to.value;
     this.isDropdownOpen = true;
   }
 
@@ -53,9 +65,9 @@ export class NewTransferComponent {
 
     const transfer: Transfer = {
       from: this.from,
-      to: this.toValue,
-      amount: this.transferForm.value.amount!
-    }
+      to: this.to.value,
+      amount: this.transferForm.value.amount ? this.transferForm.value.amount : '',
+    };
 
     this.dataService.createTransfer(transfer).subscribe((response) => {
       if (response.payload) {
@@ -63,35 +75,36 @@ export class NewTransferComponent {
         this.transferDone.emit(response);
         this.successMessage = 'Перевод успешно выполнен';
         setTimeout(() => {
-          this.successMessage = ''
-        }, 2000)
+          this.successMessage = '';
+        }, 2000);
       } else {
         this.transferForm.reset();
         switch (response?.error) {
           case 'Invalid account to':
-            this.errorMessage = 'Номер счета не существует'
+            this.errorMessage = TransferError.INVALID_ACCOUNT_TO;
             break;
           case 'Invalid account from':
-            this.errorMessage = 'Не указан счет списания'
+            this.errorMessage = TransferError.INVALID_ACCOUNT_FROM;
             break;
           case 'Invalid amount':
-            this.errorMessage = 'Не указана сумма, либо она отрицательна'
+            this.errorMessage = TransferError.INVALID_AMOUNT;
             break;
           case 'Overdraft prevented':
-            this.errorMessage = 'Не хватает средств'
+            this.errorMessage = TransferError.OVERDRAFT_PREVENTED;
             break;
           default:
-            this.errorMessage = ''
+            this.errorMessage = TransferError.DEFAULT;
         }
-        setTimeout(() => {
-          this.errorMessage = ''
-        }, 2000)
       }
-    })
+    });
   }
 
   setValue(value: string) {
-    this.toValue = value;
+    this.to.setValue(value);
     this.isDropdownOpen = false;
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

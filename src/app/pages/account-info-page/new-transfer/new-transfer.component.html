@@ -1,59 +1,69 @@
 <div class="new-transfer">
-  <div
-    *ngIf="accounts; else loading"
-  >
+  <div *ngIf="accounts; else loading">
     <h2 class="new-transfer__title">Новый перевод</h2>
     <div class="new-transfer__wrapper">
       <form
         [formGroup]="transferForm"
         (ngSubmit)="submit()"
-        class="new-transfer__form new-transfer-form">
+        class="new-transfer__form new-transfer-form"
+      >
         <div class="new-transfer-form__wrapper">
           <div class="input-wrapper">
             <input
-              (input)="clearError()"
               (keyup)="dropdownOpen()"
-              [(ngModel)]="toValue"
               formControlName="to"
               [class.error]="to.errors?.['required'] && (to.dirty || to.touched)"
-              class="new-transfer-form__input" type="text" placeholder="Введите счёт получателя">
-            <ul
-              *ngIf="toValue != '' && isDropdownOpen"
-              class="dropdown">
-              <li class="dropdown-item"
-                  *ngFor="let account of accounts | includes:to.value"
-                  (click)="setValue(account)"
-              >{{account}}</li>
+              class="new-transfer-form__input"
+              type="text"
+              placeholder="Введите счёт получателя"
+            />
+            <ul *ngIf="to.value != '' && isDropdownOpen" class="dropdown">
+              <li
+                class="dropdown-item"
+                *ngFor="let account of accounts | includes : to.value"
+                (click)="setValue(account)"
+              >
+                {{ account }}
+              </li>
             </ul>
             <span
               *ngIf="to.errors?.['required'] && (to.dirty || to.touched)"
-              class="new-transfer__error-invalid">Поле обязательно для заполнения</span>
+              class="new-transfer__error-invalid"
+              >Поле обязательно для заполнения</span
+            >
             <span
               *ngIf="to.errors?.['pattern'] && (to.dirty || to.touched)"
-              class="new-transfer__error-invalid">Допускаются только цифры</span>
+              class="new-transfer__error-invalid"
+              >Допускаются только цифры</span
+            >
           </div>
           <div class="input-wrapper">
             <input
-              (input)="clearError()"
               formControlName="amount"
               [class.error]="amount.errors?.['required'] && (amount.dirty || amount.touched)"
-              class="new-transfer-form__input" type="text" placeholder="Введите сумму перевода">
+              class="new-transfer-form__input"
+              type="text"
+              placeholder="Введите сумму перевода"
+            />
             <span
               *ngIf="amount.errors?.['required'] && (amount.dirty || amount.touched)"
-              class="new-transfer__error-invalid">Поле обязательно для заполнения</span>
+              class="new-transfer__error-invalid"
+              >Поле обязательно для заполнения</span
+            >
             <span
               *ngIf="amount.errors?.['pattern'] && (amount.dirty || amount.touched)"
-              class="new-transfer__error-invalid">Допускаются только цифры</span>
+              class="new-transfer__error-invalid"
+              >Допускаются только цифры</span
+            >
           </div>
         </div>
-        <button
-          [disabled]="transferForm.invalid"
-          class="new-transfer-form__btn" type="submit">Отправить
+        <button [disabled]="transferForm.invalid" class="new-transfer-form__btn" type="submit">
+          Отправить
         </button>
       </form>
     </div>
-    <span class="new-transfer__error">{{errorMessage}}</span>
-    <span class="new-transfer__success">{{successMessage}}</span>
+    <span class="new-transfer__error">{{ errorMessage }}</span>
+    <span class="new-transfer__success">{{ successMessage }}</span>
   </div>
 </div>
 

@@ -1,35 +1,29 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {WebsocketService} from "../../../services/websocket.service";
-import {WebSocketMessage} from "../../../interfaces/interfaces";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { WebsocketService } from '../../../services/websocket.service';
+import { WebSocketMessage } from '../../../interfaces/interfaces';
 
 @Component({
   selector: 'app-rate-stream',
   templateUrl: './rate-stream.component.html',
   styleUrls: ['./rate-stream.component.scss'],
-  providers: [WebsocketService]
+  providers: [WebsocketService],
 })
-export class RateStreamComponent implements OnInit, OnDestroy{
+export class RateStreamComponent implements OnInit, OnDestroy {
   receivedMessages: WebSocketMessage[] = [];
 
-  constructor(private WebsocketService: WebsocketService) {
-  }
+  constructor(private websocketService: WebsocketService) {}
+
   ngOnInit(): void {
-    this.openWebsocket()
+    this.openWebsocket();
   }
 
   openWebsocket() {
-    this.WebsocketService.messages.subscribe(message => {
-      // console.log(this.received)
+    this.websocketService.messages$.subscribe((message) => {
       return this.receivedMessages.unshift(message);
     });
   }
 
-
   ngOnDestroy(): void {
-    this.WebsocketService.closeWebsocket()
+    this.websocketService.closeWebsocket();
   }
-
-
 }
-
-

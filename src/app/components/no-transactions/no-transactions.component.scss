@@ -1,0 +1,7 @@
+@import 'mixins';
+
+.no-transactions {
+  @include label;
+  text-align: center;
+  margin-top: 10px;
+}

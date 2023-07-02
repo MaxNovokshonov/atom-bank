@@ -1,28 +1,19 @@
 <div class="exchange-left__bottom exchange-form">
-  <div
-    *ngIf="codes$; else loading"
-  >
+  <div *ngIf="codes; else loading">
     <h3 class="exchange-form__title">Обмен валюты</h3>
-    <form
-      [formGroup]="exchangeForm"
-      (ngSubmit)="submit()"
-      class="exchange-form__wrapper">
+    <form [formGroup]="exchangeForm" (ngSubmit)="submit()" class="exchange-form__wrapper">
       <div class="change-form__input">
         <label>Из</label>
-        <select
-          formControlName="from"
-        >
-          <option *ngFor="let code of codes$" [ngValue]="code">
+        <select formControlName="from">
+          <option *ngFor="let code of codes" [ngValue]="code">
             {{ code }}
           </option>
         </select>
       </div>
       <div class="change-form__input">
         <label>В</label>
-        <select
-          formControlName="to"
-        >
-          <option *ngFor="let code of codes$" [ngValue]="code">
+        <select formControlName="to">
+          <option *ngFor="let code of codes" [ngValue]="code">
             {{ code }}
           </option>
         </select>
@@ -30,25 +21,26 @@
       <div class="change-form__input">
         <label>Сумма</label>
         <div class="change-form__input-wrapper">
-          <input
-            formControlName="amount"
-            type="text" placeholder="Введите сумму">
+          <input formControlName="amount" type="text" placeholder="Введите сумму" />
           <span
             *ngIf="amount.errors?.['required'] && (amount.dirty || amount.touched)"
-            class="change-form__input-invalid">Поле обязательно для заполнения</span>
+            class="change-form__input-invalid"
+            >Поле обязательно для заполнения</span
+          >
           <span
             *ngIf="amount.errors?.['pattern'] && (amount.dirty || amount.touched)"
-            class="change-form__input-invalid">Допускаются только цифры</span>
+            class="change-form__input-invalid"
+            >Допускаются только цифры</span
+          >
         </div>
       </div>
 
-      <button
-        [disabled]="exchangeForm.invalid"
-        class="change-form__btn" type="submit">Обменять
+      <button [disabled]="exchangeForm.invalid" class="change-form__btn" type="submit">
+        Обменять
       </button>
     </form>
-    <span class="exchange-form__error">{{errorMessage}}</span>
-    <span class="exchange-form__success">{{successMessage}}</span>
+    <span class="exchange-form__error">{{ errorMessage }}</span>
+    <span class="exchange-form__success">{{ successMessage }}</span>
   </div>
 </div>
 

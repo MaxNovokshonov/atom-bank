@@ -1,13 +1,20 @@
-<div
-  *ngIf="account$ as account; else loading"
->
+<div *ngIf="account; else loading">
   <app-details-header title="История баланса" [account]="account"></app-details-header>
   <div class="balance-history">
-    <app-balance-dynamics title="Динамика баланса" [id]="account.account"
-                          [transactions]="allTransactions"></app-balance-dynamics>
-    <app-balance-dynamics title="Соотношение входящих исходящих транзакций" [id]="account.account"
-                          [transactions]="allTransactions"></app-balance-dynamics>
-    <app-transfer-history [transactions]="lastTransactions" [id]="account.account"></app-transfer-history>
+    <app-balance-dynamics
+      title="Динамика баланса"
+      [id]="account.account"
+      [transactions]="allTransactions"
+    ></app-balance-dynamics>
+    <app-balance-dynamics
+      title="Соотношение входящих исходящих транзакций"
+      [id]="account.account"
+      [transactions]="allTransactions"
+    ></app-balance-dynamics>
+    <app-transfer-history
+      [transactions]="lastTransactions"
+      [id]="account.account"
+    ></app-transfer-history>
   </div>
 </div>
 

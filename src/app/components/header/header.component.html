@@ -1,39 +1,20 @@
 <header class="header">
-  <img class="header__logo" src="assets/img/Logo_Atom_black.svg" alt="Лого"
-  >
-  <nav class="nav"
-       [class.nav-active]="mobileMenuOpen"
-       *ngIf="isAuth()"
-  >
-    <a class="nav__item"
-       (click)="closeMobileMenu()"
-       routerLinkActive="active"
-       routerLink="/atm"
-    >Банкоматы</a>
+  <img alt="Лого" class="header__logo" src="assets/img/Logo_Atom_black.svg" />
+  <nav *ngIf="isAuth()" [class.nav-active]="mobileMenuOpen" class="nav">
     <a
-      class="nav__item"
+      *ngFor="let item of navigation"
       (click)="closeMobileMenu()"
-      routerLinkActive="active"
-      routerLink="/accounts"
-    >Счета</a>
-    <a
       class="nav__item"
-      (click)="closeMobileMenu()"
+      [routerLink]="item.link"
       routerLinkActive="active"
-      routerLink="/exchange"
-    >Валюта</a>
-    <a
-      (click)="logout()"
-      class="nav__item"
-      routerLinkActive="active"
-      routerLink="/authorization"
-    >Выйти</a>
+      >{{ item.title }}</a
+    >
   </nav>
   <button
-    class="burger"
-    *ngIf="isAuth()"
     (click)="openMobileMenu()"
+    *ngIf="isAuth()"
     [class.burger-active]="mobileMenuOpen"
+    class="burger"
   >
     <span class="burger__line"></span>
     <span class="burger__line"></span>

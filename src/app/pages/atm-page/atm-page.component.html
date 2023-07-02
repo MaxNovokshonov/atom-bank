@@ -1,10 +1,12 @@
 <div class="atm">
   <h2 class="atm__title">Карта банкоматов</h2>
   <div class="atm__map">
-    <ya-map [center]="[55.751952, 37.600739]" [zoom]="4" [state]="{ controls: ['smallMapDefaultSet'] }">
-      <ya-placemark
-        *ngFor="let atm of coordinates$"
-        [geometry]="[atm.lat, atm.lon]"></ya-placemark>
+    <ya-map
+      [center]="[55.751952, 37.600739]"
+      [state]="{ controls: ['smallMapDefaultSet'] }"
+      [zoom]="4"
+    >
+      <ya-placemark *ngFor="let atm of coordinates" [geometry]="[atm.lat, atm.lon]"></ya-placemark>
     </ya-map>
   </div>
 </div>

@@ -1,9 +1,7 @@
-@import "variables";
-@import "mixins";
+@import 'variables';
+@import 'mixins';
 
 .card {
-
-
   &__wrapper {
     display: flex;
     flex-direction: column;
@@ -47,7 +45,7 @@
   &__btn:hover {
     background-color: $secondaryBlack;
     color: $white;
-    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
   &__btn:active {

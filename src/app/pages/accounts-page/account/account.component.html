@@ -1,16 +1,13 @@
 <div class="card__wrapper">
-  <span class="card__number">{{account.account}}</span>
-  <span class="card__balance">{{account.balance | currency: 'RUB':'symbol-narrow'}}</span>
+  <span class="card__number">{{ account.account }}</span>
+  <span class="card__balance">{{ account.balance | currency : 'RUB' : 'symbol-narrow' }}</span>
   <span class="card__info">Последняя транзакция:</span>
-  <span
-    *ngIf="account.transactions.length; else noTransactions"
-    class="card__date">{{account.transactions[0].date | date:'dd.MM.YYYY'}}</span>
+  <span *ngIf="account.lastTransaction; else noTransactions" class="card__date">{{
+    account.lastTransaction | date : 'dd.MM.yyyy'
+  }}</span>
 </div>
-<a
-  [routerLink]="['/account', account.account]"
-  class="card__btn">Открыть</a>
+<a [routerLink]="['/account', account.account]" class="card__btn">Открыть</a>
 
 <ng-template #noTransactions>
-  <span
-    class="card__date">Нет транзакций</span>
+  <span class="card__date">Нет транзакций</span>
 </ng-template>

@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {AuthResponse, User} from "../interfaces/interfaces";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthResponse, User } from '../interfaces/interfaces';
+import { mainUrl } from '../../environments/environment';
 
-// const BASE_URL = 'http://localhost:3000/'
-const BASE_URL = 'https://coin-maxnovokshonov.amvera.io/'
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   constructor(private http: HttpClient) {}
 
   login(user: User): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${BASE_URL}login`, user)
+    return this.http.post<AuthResponse>(`${mainUrl.BASE_URL}login`, user);
   }
 
   get token() {
-    return localStorage.getItem('token')
+    return localStorage.getItem('token');
   }
 
   logout() {
@@ -27,6 +25,4 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
   }
-
-
 }

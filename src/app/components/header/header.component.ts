@@ -1,30 +1,33 @@
-import {Component} from '@angular/core';
-import {AuthService} from "../../services/auth.service";
+import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
+import { NavMenu } from '../../interfaces/nav-menu';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
   mobileMenuOpen = false;
 
-  constructor(private authService: AuthService) {
-  }
+  navigation: NavMenu[] = [
+    { title: 'Банкоматы', link: '/atm' },
+    { title: 'Счета', link: '/accounts' },
+    { title: 'Валюта', link: '/exchange' },
+    { title: 'Выйти', link: '/authorization' },
+  ];
+
+  constructor(private authService: AuthService) {}
 
   openMobileMenu() {
     this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 
-  closeMobileMenu() {
+  closeMobileMenu(): void {
     this.mobileMenuOpen = false;
-  }
-  isAuth() {
-    return this.authService.isAuthenticated()
   }
 
-  logout() {
-    this.mobileMenuOpen = false;
-    this.authService.logout()
+  isAuth() {
+    return this.authService.isAuthenticated();
   }
 }

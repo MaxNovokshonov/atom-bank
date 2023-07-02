@@ -1,56 +1,49 @@
-import {Injectable} from "@angular/core";
-import {Observable, Observer, Subject} from 'rxjs';
-import {AnonymousSubject} from 'rxjs/internal/Subject';
-import {map} from 'rxjs/operators';
-import {WebSocketMessage} from "../interfaces/interfaces";
-
-// const WS_URL = 'ws://localhost:3000/currency-feed';
-const WS_URL = 'wss://coin-maxnovokshonov.amvera.io/currency-feed'
+import { Injectable } from '@angular/core';
+import { Observable, Observer, Subject } from 'rxjs';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
+import { map } from 'rxjs/operators';
+import { WebSocketMessage } from '../interfaces/interfaces';
+import { mainUrl } from '../../environments/environment';
 
 @Injectable()
 export class WebsocketService {
+  subject$: Subject<MessageEvent>;
 
-  subject: Subject<MessageEvent>;
-  public messages: Observable<WebSocketMessage>;
-  websocket = new WebSocket(WS_URL);
+  public messages$: Observable<WebSocketMessage>;
+
+  websocket = new WebSocket(mainUrl.WS_URL);
 
   constructor() {
-    this.messages = this.connect(WS_URL).pipe(
-      map(
-        (response: MessageEvent): WebSocketMessage => {
-          return JSON.parse(response.data);
-        }
-      )
+    this.messages$ = this.connect().pipe(
+      map((response: MessageEvent): WebSocketMessage => {
+        return JSON.parse(response.data);
+      }),
     );
   }
 
   closeWebsocket() {
-    this.websocket.close()
+    this.websocket.close();
   }
 
-  connect(url: string): Subject<MessageEvent> {
-    if (!this.subject) {
-      this.subject = this.openWebsocket(url);
+  connect(): Subject<MessageEvent> {
+    if (!this.subject$) {
+      this.subject$ = this.openWebsocket();
     }
-    return this.subject;
+    return this.subject$;
   }
 
-
-  openWebsocket(url: string): AnonymousSubject<MessageEvent> {
-    let observable = new Observable((obs: Observer<MessageEvent>) => {
+  openWebsocket(): AnonymousSubject<MessageEvent> {
+    const observable = new Observable((obs: Observer<MessageEvent>) => {
       this.websocket.onmessage = obs.next.bind(obs);
       this.websocket.onerror = obs.error.bind(obs);
       this.websocket.onclose = obs.complete.bind(obs);
       return this.websocket.close.bind(this.websocket);
     });
-    let observer = {
-      error: (err: any) => {},
+    const observer = {
+      error: () => {},
       complete: () => {},
-      next: (data: Object) => {}
+      next: () => {},
     };
     return new AnonymousSubject<MessageEvent>(observer, observable);
   }
-
-
 }
-

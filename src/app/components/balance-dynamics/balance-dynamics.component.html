@@ -1,4 +1,13 @@
 <div class="balance-dynamics">
-  <h2 class="balance-dynamics__title">{{title}}</h2>
-  <div echarts [options]="chartOption" class="balance-dynamics__wrapper"></div>
+  <h2 class="balance-dynamics__title">{{ title }}</h2>
+  <div
+    *ngIf="transactions.length; else NoTransactions"
+    echarts
+    [options]="chartOption"
+    class="balance-dynamics__wrapper"
+  ></div>
 </div>
+
+<ng-template #NoTransactions>
+  <app-no-transactions></app-no-transactions>
+</ng-template>

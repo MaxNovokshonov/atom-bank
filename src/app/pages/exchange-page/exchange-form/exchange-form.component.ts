@@ -1,29 +1,33 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {DataService} from "../../../services/data.service";
-import {map} from "rxjs";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Transfer} from "../../../interfaces/interfaces";
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { DataService } from '../../../services/data.service';
+import { map, merge, Subscription } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Transfer } from '../../../interfaces/interfaces';
+import { ExchangeError } from '../../../interfaces/exchange-error';
 
 @Component({
   selector: 'app-exchange-form',
   templateUrl: './exchange-form.component.html',
-  styleUrls: ['./exchange-form.component.scss']
+  styleUrls: ['./exchange-form.component.scss'],
 })
-export class ExchangeFormComponent implements OnInit {
-
+export class ExchangeFormComponent implements OnInit, OnDestroy {
   @Output() exchangeDone = new EventEmitter();
 
-  codes$: string[];
+  codes: string[];
+
   errorMessage = '';
+
   successMessage = '';
+
+  errorSubscription = new Subscription();
+
   exchangeForm = new FormGroup({
     from: new FormControl(''),
     to: new FormControl(''),
-    amount: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')])
-  })
+    amount: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')]),
+  });
 
-  constructor(private dataService: DataService) {
-  }
+  constructor(private dataService: DataService) {}
 
   get from() {
     return this.exchangeForm.controls.from as FormControl;
@@ -36,19 +40,27 @@ export class ExchangeFormComponent implements OnInit {
   get amount() {
     return this.exchangeForm.controls.amount as FormControl;
   }
+
   ngOnInit(): void {
-    this.getCurrenciesCodes()
+    this.getCurrenciesCodes();
+    this.errorSubscription.add(
+      merge(this.from.valueChanges, this.to.valueChanges, this.amount.valueChanges).subscribe(() =>
+        this.clearError(),
+      ),
+    );
+  }
+
+  clearError() {
+    this.errorMessage = '';
   }
 
   getCurrenciesCodes() {
-    this.dataService.getCurrenciesCodes()
-      .pipe(
-        map((res) => res.payload)
-      )
+    this.dataService
+      .getCurrenciesCodes()
+      .pipe(map((res) => res.payload))
       .subscribe((response) => {
-      this.codes$ = response;
-      console.log(this.codes$)
-    })
+        this.codes = response;
+      });
   }
 
   submit() {
@@ -57,10 +69,10 @@ export class ExchangeFormComponent implements OnInit {
     }
 
     const exchangeData: Transfer = {
-      from: this.exchangeForm.value.from!,
-      to: this.exchangeForm.value.to!,
-      amount: this.exchangeForm.value.amount!
-    }
+      from: this.exchangeForm.value.from ? this.exchangeForm.value.from : '',
+      to: this.exchangeForm.value.to ? this.exchangeForm.value.to : '',
+      amount: this.exchangeForm.value.amount ? this.exchangeForm.value.amount : '',
+    };
 
     this.dataService.createExchange(exchangeData).subscribe((response) => {
       if (response.payload) {
@@ -68,30 +80,31 @@ export class ExchangeFormComponent implements OnInit {
         this.exchangeDone.emit(response.payload);
         this.successMessage = 'Обмен валюты успешно совершен';
         setTimeout(() => {
-          this.successMessage = ''
-        }, 2000)
+          this.successMessage = '';
+        }, 2000);
       } else {
         this.exchangeForm.reset();
         switch (response?.error) {
           case 'Unknown currency code':
-            this.errorMessage = 'Неверный валютный код'
+            this.errorMessage = ExchangeError.UNKNOWN_CURRENCY_CODE;
             break;
           case 'Invalid amount':
-            this.errorMessage = 'Не указана сумма, либо она отрицательна'
+            this.errorMessage = ExchangeError.INVALID_AMOUNT;
             break;
           case 'Not enough currency':
-            this.errorMessage = 'На валютном счёте списания нет средств'
+            this.errorMessage = ExchangeError.NOT_ENOUGH_CURRENCY;
             break;
           case 'Overdraft prevented':
-            this.errorMessage = 'Не хватает средств'
+            this.errorMessage = ExchangeError.OVERDRAFT_PREVENTED;
             break;
           default:
-            this.errorMessage = ''
+            this.errorMessage = ExchangeError.DEFAULT;
         }
-        setTimeout(() => {
-          this.errorMessage = ''
-        }, 2000)
       }
-    })
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.errorSubscription.unsubscribe();
   }
 }

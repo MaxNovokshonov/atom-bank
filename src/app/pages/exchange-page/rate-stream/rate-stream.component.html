@@ -1,16 +1,12 @@
 <div class="exchange-right rate">
-<h3 class="rate__title">Изменение курсов в реальном времени</h3>
+  <h3 class="rate__title">Изменение курсов в реальном времени</h3>
   <ul class="rate__list">
-    <li
-      *ngFor="let message of receivedMessages.slice(0, 24)"
-      class="rate__item">
-      <span class="rate__item-name">{{message.from}}/{{message.to}}</span>
-      <span
-        [class.rate__item-dotted-red]="message.change == -1"
-        class="rate__item-dotted"></span>
-      <span
-        [class.rate__item-count-red]="message.change == -1"
-        class="rate__item-count">{{message.rate}}</span>
+    <li *ngFor="let message of receivedMessages.slice(0, 24)" class="rate__item">
+      <span class="rate__item-name">{{ message.from }}/{{ message.to }}</span>
+      <span [class.rate__item-dotted-red]="message.change == -1" class="rate__item-dotted"></span>
+      <span [class.rate__item-count-red]="message.change == -1" class="rate__item-count">{{
+        message.rate
+      }}</span>
     </li>
   </ul>
 </div>

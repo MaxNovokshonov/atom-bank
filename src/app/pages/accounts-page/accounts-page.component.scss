@@ -1,5 +1,5 @@
-@import "mixins";
-@import "variables";
+@import 'mixins';
+@import 'variables';
 
 .accounts-header {
   display: flex;
@@ -37,7 +37,7 @@
   &__btn:hover {
     background-color: $secondaryBlack;
     color: $white;
-    transition: background-color .2s ease-in-out, color .2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
   &__btn:active {
@@ -73,22 +73,22 @@
   background-image: url('/assets/img/contact-arrow.svg');
   background-repeat: no-repeat;
   background-position: center center;
-  transition: transform .3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .contact__name:hover {
   border: 1px solid $primaryBlack;
-  transition: border-color .3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
 }
 
 .contact__name:active {
   background-color: var(--color-mischka);
-  transition: background-color .3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .contact__list--active.contact__name::before {
   transform: rotate(-180deg);
-  transition: transform .3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 .contact__list {
@@ -103,7 +103,7 @@
   left: 0;
   opacity: 0;
   visibility: hidden;
-  transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   background-color: var(--color-athens-gray);
   border: 1px solid var(--color-gray-suit);
 }
@@ -111,7 +111,7 @@
 .contact__list.contact__list--active {
   opacity: 1;
   visibility: visible;
-  transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .contact__item {
@@ -119,11 +119,11 @@
   padding-top: 4px;
   border-bottom: 7px;
   padding-left: 12px;
-  transition: background-color .3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .contact__item:hover {
-  transition: background-color .3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
   background-color: var(--color-mischka);
 }
 
@@ -141,7 +141,7 @@
     padding: 22px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
     border-radius: 9px;
-    background-image: url("/assets/img/card_background.jpg");
+    background-image: url('/assets/img/card_background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -157,7 +157,6 @@
 @media (max-width: 1400px) {
   .accounts-list {
     grid-template-columns: repeat(2, 1fr);
-
   }
 }
 
