@@ -15,8 +15,8 @@ export class SortPipe implements PipeTransform {
     }
 
     return accounts.sort((a, b) => {
-      const x = a[sortType];
-      const y = b[sortType];
+      const x = a[sortType] !== null ? a[sortType] : 0;
+      const y = b[sortType] !== null ? b[sortType] : 0;
       if (x > y) {
         return sortDirection;
       }

@@ -18,6 +18,10 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  setToken(value: string) {
+    localStorage.setItem('token', value);
+  }
+
   logout() {
     localStorage.clear();
   }

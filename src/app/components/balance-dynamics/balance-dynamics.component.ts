@@ -18,7 +18,6 @@ export class BalanceDynamicsComponent implements OnChanges {
   chartOption: EChartsOption;
 
   ngOnChanges(): void {
-    this.getData();
     this.createChartOptions();
   }
 
@@ -102,6 +101,8 @@ export class BalanceDynamicsComponent implements OnChanges {
       return;
     }
 
+    const data = this.getData();
+
     if (this.title === BalanceDynamics.DYNAMICS) {
       this.chartOption = {
         legend: {
@@ -121,7 +122,7 @@ export class BalanceDynamicsComponent implements OnChanges {
           containLabel: true,
         },
         xAxis: {
-          data: this.getData()?.legend,
+          data: data?.legend,
           axisTick: {
             show: false,
           },
@@ -148,7 +149,7 @@ export class BalanceDynamicsComponent implements OnChanges {
               color: '#32BE4B',
             },
             barCategoryGap: '20%',
-            data: this.getData()?.dynamicsPerMonth,
+            data: data?.dynamicsPerMonth,
           },
         ],
         dataZoom: [
@@ -178,7 +179,7 @@ export class BalanceDynamicsComponent implements OnChanges {
           containLabel: true,
         },
         xAxis: {
-          data: this.getData()?.legend,
+          data: data?.legend,
           axisTick: {
             show: false,
           },
@@ -205,7 +206,7 @@ export class BalanceDynamicsComponent implements OnChanges {
               color: '#32BE4B',
             },
             barCategoryGap: '20%',
-            data: this.getData()?.positiveDynamicsPerMonth,
+            data: data?.positiveDynamicsPerMonth,
           },
           {
             name: 'Исходящие переводы',
@@ -214,7 +215,7 @@ export class BalanceDynamicsComponent implements OnChanges {
               color: '#EB5757',
             },
             barCategoryGap: '20%',
-            data: this.getData()?.negativeDynamicsPerMonth,
+            data: data?.negativeDynamicsPerMonth,
           },
         ],
         dataZoom: [

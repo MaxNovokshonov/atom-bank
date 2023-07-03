@@ -69,9 +69,9 @@ export class ExchangeFormComponent implements OnInit, OnDestroy {
     }
 
     const exchangeData: Transfer = {
-      from: this.exchangeForm.value.from ? this.exchangeForm.value.from : '',
-      to: this.exchangeForm.value.to ? this.exchangeForm.value.to : '',
-      amount: this.exchangeForm.value.amount ? this.exchangeForm.value.amount : '',
+      from: this.exchangeForm.value.from || '',
+      to: this.exchangeForm.value.to || '',
+      amount: this.exchangeForm.value.amount || '',
     };
 
     this.dataService.createExchange(exchangeData).subscribe((response) => {
@@ -84,24 +84,24 @@ export class ExchangeFormComponent implements OnInit, OnDestroy {
         }, 2000);
       } else {
         this.exchangeForm.reset();
-        switch (response?.error) {
-          case 'Unknown currency code':
-            this.errorMessage = ExchangeError.UNKNOWN_CURRENCY_CODE;
-            break;
-          case 'Invalid amount':
-            this.errorMessage = ExchangeError.INVALID_AMOUNT;
-            break;
-          case 'Not enough currency':
-            this.errorMessage = ExchangeError.NOT_ENOUGH_CURRENCY;
-            break;
-          case 'Overdraft prevented':
-            this.errorMessage = ExchangeError.OVERDRAFT_PREVENTED;
-            break;
-          default:
-            this.errorMessage = ExchangeError.DEFAULT;
-        }
+        this.errorMessage = this.getErrorMessage(response.error);
       }
     });
+  }
+
+  getErrorMessage(error: string): string {
+    switch (error) {
+      case ExchangeError.UNKNOWN_CURRENCY_CODE:
+        return 'Неверный валютный код';
+      case ExchangeError.INVALID_AMOUNT:
+        return 'Не указана сумма, либо она отрицательна';
+      case ExchangeError.NOT_ENOUGH_CURRENCY:
+        return 'На валютном счёте списания нет средств';
+      case ExchangeError.OVERDRAFT_PREVENTED:
+        return 'Не хватает средств';
+      default:
+        return 'Неизвестная ошибка';
+    }
   }
 
   ngOnDestroy(): void {

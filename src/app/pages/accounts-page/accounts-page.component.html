@@ -19,7 +19,7 @@
   </div>
   <ul class="accounts-list">
     <app-account
-      *ngFor="let account of accounts | sort : sortField$.getValue()"
+      *ngFor="let account of accounts | sort : sortField"
       [account]="account"
       class="accounts-list__item card"
     ></app-account>

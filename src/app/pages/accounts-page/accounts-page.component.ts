@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DataService } from '../../services/data.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';
@@ -14,7 +14,7 @@ import { Select } from '../../interfaces/interfaces';
 export class AccountsPageComponent implements OnInit, OnDestroy {
   accounts$: Observable<any>;
 
-  sortField$ = new BehaviorSubject<Select>({ direction: 1, type: SortType.DEFAULT });
+  sortField: Select = { direction: 1, type: SortType.DEFAULT };
 
   sortSubscription = new Subscription();
 
@@ -98,7 +98,7 @@ export class AccountsPageComponent implements OnInit, OnDestroy {
   }
 
   sortBy(field: Select): void {
-    this.sortField$.next(field);
+    this.sortField = field;
   }
 
   ngOnDestroy(): void {

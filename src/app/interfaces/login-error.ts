@@ -1,5 +1,4 @@
 export enum LoginError {
-  NO_SUCH_USER = 'Пользователь не найден',
-  INVALID_PASSWORD = 'Неверный пароль',
-  DEFAULT = 'Неизвестная ошибка',
+  NO_SUCH_USER = 'No such user',
+  INVALID_PASSWORD = 'Invalid password',
 }

@@ -66,7 +66,7 @@ export class NewTransferComponent implements OnInit, OnDestroy {
     const transfer: Transfer = {
       from: this.from,
       to: this.to.value,
-      amount: this.transferForm.value.amount ? this.transferForm.value.amount : '',
+      amount: this.transferForm.value.amount || '',
     };
 
     this.dataService.createTransfer(transfer).subscribe((response) => {
@@ -79,24 +79,24 @@ export class NewTransferComponent implements OnInit, OnDestroy {
         }, 2000);
       } else {
         this.transferForm.reset();
-        switch (response?.error) {
-          case 'Invalid account to':
-            this.errorMessage = TransferError.INVALID_ACCOUNT_TO;
-            break;
-          case 'Invalid account from':
-            this.errorMessage = TransferError.INVALID_ACCOUNT_FROM;
-            break;
-          case 'Invalid amount':
-            this.errorMessage = TransferError.INVALID_AMOUNT;
-            break;
-          case 'Overdraft prevented':
-            this.errorMessage = TransferError.OVERDRAFT_PREVENTED;
-            break;
-          default:
-            this.errorMessage = TransferError.DEFAULT;
-        }
+        this.errorMessage = this.getErrorMessage(response.error);
       }
     });
+  }
+
+  getErrorMessage(error: string): string {
+    switch (error) {
+      case TransferError.INVALID_ACCOUNT_TO:
+        return 'Номер счета не существует';
+      case TransferError.INVALID_ACCOUNT_FROM:
+        return 'Не указан счет списания';
+      case TransferError.INVALID_AMOUNT:
+        return 'Не указана сумма, либо она отрицательна';
+      case TransferError.OVERDRAFT_PREVENTED:
+        return 'Не хватает средств';
+      default:
+        return 'Неизвестная ошибка';
+    }
   }
 
   setValue(value: string) {

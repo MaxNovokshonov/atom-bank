@@ -40,19 +40,21 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   private setToken(response: AuthResponse) {
     if (response?.payload != null) {
-      localStorage.setItem('token', response.payload.token);
+      this.authService.setToken(response.payload.token);
     } else {
-      switch (response?.error) {
-        case 'No such user':
-          this.errorMessage = LoginError.NO_SUCH_USER;
-          break;
-        case 'Invalid password':
-          this.errorMessage = LoginError.INVALID_PASSWORD;
-          break;
-        default:
-          this.errorMessage = LoginError.DEFAULT;
-      }
-      localStorage.clear();
+      this.errorMessage = this.getErrorMessage(response.error);
+      this.authService.logout();
+    }
+  }
+
+  getErrorMessage(error: string): string {
+    switch (error) {
+      case LoginError.NO_SUCH_USER:
+        return 'Пользователь не найден';
+      case LoginError.INVALID_PASSWORD:
+        return 'Неверный пароль';
+      default:
+        return 'Неизвестная ошибка';
     }
   }
 
@@ -66,17 +68,15 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     }
 
     const user: User = {
-      login: this.authForm.value.login ? this.authForm.value.login : '',
-      password: this.authForm.value.password ? this.authForm.value.password : '',
+      login: this.authForm.value.login || '',
+      password: this.authForm.value.password || '',
     };
 
     this.authService.login(user).subscribe((response) => {
       this.authForm.reset();
       this.clearError();
       this.setToken(response);
-      setTimeout(() => {
-        this.router.navigate(['accounts']);
-      }, 100);
+      this.router.navigate(['accounts']);
     });
   }
 
